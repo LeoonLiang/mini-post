@@ -12,6 +12,7 @@ export const request = (url = '', params) => {
     data: data,
     method: method,
     header: {
+      Authorization: `Bearer ${uni.getStorageSync('token')}`,
       'content-type': contentType,
       'helpers-lang': 'zh-cn'
     }
@@ -20,7 +21,12 @@ export const request = (url = '', params) => {
     uni.request({
       ...option,
       success: (res) => {
-        console.log(29, res)
+       if (res.data && res.data.token) {
+        uni.setStorage({
+          key: 'token',
+          data: res.data.token
+        })
+       }
         resolve(res)
       },
       fail: (err) => {

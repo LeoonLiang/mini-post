@@ -15,7 +15,7 @@
 			@delete="handleDelete"
 		/>
 		<van-button
-			@click="handleSumbit"
+			@click="handleSubmit"
 			:loading="loading"
 			type="info"
 			loading-text="图片上传中..."
@@ -40,15 +40,20 @@
 			}
 		},
 		onLoad() {
+				this.login()
 		},
 		methods: {
 			// 获取用户标识码
-			getLoginCode(afterGerCode) {
+			login(afterGerCode) {
 				uni.login({
 					provider: 'weixin',
 					success: (loginRes) => {
-						this.code = loginRes.code
-						afterGerCode && afterGerCode()
+						apiPost('/user/miniLogin', {code: loginRes.code})
+						.then(res => {
+							if (res.data.statusCode !== 201) {
+								Toast.fail(res.data.message)
+							}
+						})
 					}
 				})
 			},
@@ -61,6 +66,7 @@
 						uni.uploadFile({
 								url: `${baseUrl}upload/`, //仅为示例，非真实的接口地址
 								filePath: item.url,
+								header: { Authorization: `Bearer ${uni.getStorageSync('token')}` },
 								name: 'file',
 								success: (uploadFileRes) => {
 									resolve(JSON.parse(uploadFileRes.data))
@@ -91,16 +97,11 @@
 		handleDelete(e) {
 			this.fileList.splice(e.detail.index, 1)
 		},
-		// 点击提交
-		handleSumbit() {
-			// 获取loginCode
+		// 处理提交数据
+		handleSubmit() {
 			uni.showLoading({
 				title: '发布中'
 			});
-			this.getLoginCode(this.sumbitData)
-		},
-		// 处理提交数据
-		sumbitData() {
 			const fileList = this.fileList.map(item => {
 				return item.name
 			})
