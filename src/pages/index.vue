@@ -15,6 +15,7 @@
 			@delete="handleDelete"
 		/>
 		<van-button
+			class="publish-btn"
 			@click="handleSubmit"
 			:loading="loading"
 			type="info"
@@ -146,6 +147,7 @@
 
 	.text-area {
 		width: 100%;
+		height: 200px;
 	}
 	.title {
 		font-size: 36rpx;
@@ -153,5 +155,15 @@
 	}
 	/deep/.van-uploader {
 		margin-top: 10px;
+	}
+	/deep/.publish-btn .van-button {
+		width: 100px;
+		height: 100px;
+		position: fixed;
+		bottom: 60px;
+		left: 50%;
+		transform: translateX(-50%);
+		border-radius: 50%;
+		white-space: nowrap;
 	}
 </style>
