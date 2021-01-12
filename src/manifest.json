@@ -1,6 +1,6 @@
 {
 	"name": "",
-	"appid": "",
+	"appid": "wxbc2136fc045a47e7",
 	"description": "",
 	"versionName": "1.0.0",
 	"versionCode": "100",
@@ -54,7 +54,7 @@
 
 	},
 	"mp-weixin": { /* 微信小程序特有相关 */
-		"appid": "",
+		"appid": "wxbc2136fc045a47e7",
 		"setting": {
 			"urlCheck": false
 		},

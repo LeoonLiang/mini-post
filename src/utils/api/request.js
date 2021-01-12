@@ -1,4 +1,4 @@
-export const baseUrl = 'https://leoon.test.utools.club/api/'
+export const baseUrl = 'https://blog.leoon.cn/api'
 export const request = (url = '', params) => {
   const {
     method = 'GET',
