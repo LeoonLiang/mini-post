@@ -65,7 +65,7 @@
 				let promiseList = file.map((item) => {
 					return new Promise((resolve, reject) => {
 						uni.uploadFile({
-								url: `${baseUrl}upload/`, //仅为示例，非真实的接口地址
+								url: `${baseUrl}/upload/`, //仅为示例，非真实的接口地址
 								filePath: item.url,
 								header: { Authorization: `Bearer ${uni.getStorageSync('token')}` },
 								name: 'file',
@@ -115,7 +115,7 @@
 					Toast.success('发表成功')
 					this.clearData()
 				} else {
-
+					Toast.fail('发表失败，请联系管理员')
 				}
 			}).then(res => {
     		uni.hideLoading()
