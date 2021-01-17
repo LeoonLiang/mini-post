@@ -1,4 +1,4 @@
-export const baseUrl = 'https://blog.leoon.cn/api'
+export const baseUrl = process.env.NODE_ENV === 'production' ? 'https://blog.leoon.cn/api' :'http://localhost:3004/api'
 export const request = (url = '', params) => {
   const {
     method = 'GET',
